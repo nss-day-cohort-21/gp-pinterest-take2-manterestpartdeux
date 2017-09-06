@@ -31,15 +31,15 @@ app.config(($routeProvider) => {
 	})
 	.when('/home', {
 		templateUrl: 'partials/home.html',
-		controller: 'listCtrl',
+		controller: 'homeCtrl',
 		resolve: {isAuth}
 	})
-	.when('/item/newItem', {
+	.when('/addpin', {
 		templateUrl: 'partials/form.html',
-		controller: 'addTaskCtrl',
+		controller: 'addPinCtrl',
 		resolve: {isAuth}
 	})
-	.when('/task/:itemId', {
+	.when('/pin/:itemId', {
 		templateUrl: 'partials/pin-detail.html',
 		controller: 'detailTaskCtrl',
 		resolve: {isAuth}
@@ -63,6 +63,7 @@ app.run(($location, FBCreds) => {
 
 	firebase.initializeApp(authConfig);
 });
+
 
 // // example of $rootScope
 // app.run(function($rootScope){
