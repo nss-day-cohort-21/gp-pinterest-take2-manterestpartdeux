@@ -1,0 +1,25 @@
+{
+  "flavors": [{
+    "id" : 102,
+    "type": "cream",
+    "title": "Vanilla",
+    "price": 1.00,
+    "milk": true
+  }, {
+    "id" : 103,
+    "type": "cream",
+    "title": "Triple Chocolate",
+    "price": 1.50,
+    "milk": true
+  }, {
+    "id" : 104,
+    "type": "sherbet",
+    "title": "Rainbow",
+    "price": 1.25
+  }, {
+    "id" : 105,
+    "type": "sherbet",
+    "title": "Cotton Candy Swirl",
+    "price": 13.50
+  }]
+}

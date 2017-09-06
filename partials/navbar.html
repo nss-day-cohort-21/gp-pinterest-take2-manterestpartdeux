@@ -1,4 +1,4 @@
-<nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark" ng-controller="navCtrl">
+<nav class="navbar navbar-expand-md navbar-dark bg-dark" ng-controller="navCtrl">
       <a class="navbar-brand" href="#">Manterest</a>
       <button class="navbar-toggler d-lg-none" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
@@ -16,8 +16,12 @@
           <li class="nav-item">
             <a class="nav-link" href="#">User</a>
           </li>
-          
+          <li class="nav-item" ng-show="!isLoggedIn">
+            <a class= "nav-link" >Login</a></li>
+          <li class="nav-item" ng-show="isLoggedIn">
+            <a class="nav-link" ng-click="logout()" >Logout</a></li>
         </ul>
+        
         
       </div>
     </nav>
