@@ -9,13 +9,15 @@ app.factory("pinsFactory", function($q, $http, FBCreds){
       .then((megaObject)=>{
         console.log('megaObject', megaObject);
         
-        let pinCollection = megaObject.data;
-        console.log('pinCollection', pinCollection.pins);
-        // Object.keys(pinCollection.flavors).forEach((key)=>{
-        //   pinCollection[key] = key;
-        //   pins.push(pinCollection[key]);
-        // });
-        resolve(pinCollection.pins);
+        let pinCollection = megaObject.data.pins;
+        console.log('pinCollection', pinCollection);
+        Object.keys(pinCollection).forEach((key)=>{
+          pinCollection[key].id = key;
+          pins.push(pinCollection[key]);
+        });
+        console.log('pins', pins);
+        
+        resolve(pins);
       })
       .catch((error)=>{
         console.log('error', error);
@@ -25,7 +27,21 @@ app.factory("pinsFactory", function($q, $http, FBCreds){
    const getAllUserPins = function(user){
     console.log('FBCreds', FBCreds);
     return $q((resolve, reject)=>{
-      $http.get(`${FBCreds.databaseURL}.json?orderBy="uid"&equalTo="${user}"`);
+      $http.get(`${FBCreds.databaseURL}.json?orderBy="uid"&equalTo="${user}"`)
+      .then((megaObject)=>{
+        console.log('megaObject', megaObject);
+        
+        let pinCollection = megaObject.data.pins;
+        console.log('pinCollection', pinCollection);
+        // Object.keys(pinCollection.flavors).forEach((key)=>{
+        //   pinCollection[key] = key;
+        //   pins.push(pinCollection[key]);
+        // });
+        resolve(pinCollection);
+      })
+      .catch((error)=>{
+        console.log('error', error);
+      });
     });
   };
 
@@ -36,9 +52,7 @@ app.factory("pinsFactory", function($q, $http, FBCreds){
           console.log('data should be an ID', data);
           return data;
       }, (error) =>{
-          let errorCode = error.code;
-          let errorMessage = error.message;
-          console.log('error', errorCode, errorMessage);
+          console.log('error', error);
       });
   
   };
@@ -52,7 +66,15 @@ app.factory("pinsFactory", function($q, $http, FBCreds){
   };
 
   const getSinglePin = function(id){
-
+    return $q((resolve, reject)=>{
+        $http.get(`${FBCreds.databaseURL}/pins/${id}.json`)
+        .then((itemObj)=>{
+            resolve(itemObj.data);
+        })
+        .catch((error)=>{
+            reject(error);
+        });
+      });
   };
 
   return {getAllPins, addPin, editPin, deletePin, getSinglePin};

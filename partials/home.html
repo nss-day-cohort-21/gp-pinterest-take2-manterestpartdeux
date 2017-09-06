@@ -5,9 +5,11 @@
   <!-- ng-repeat= "| filter: searchText.search | filter: isCompleted: false" -->
     <div class="panel panel-default">
         <div class="panel-body">
-            <div class="col-xs-6"><a ng-href="#!/pin/{{key.id}}"><img ng-src="{{key.imgUrl}}" alt="broken"/></a></div>
+          <a ng-href="#!/pin/{{key.id}}">
+            <div class="col-xs-6"><img ng-src="{{key.imgUrl}}" alt="broken"/></div>
             <div class="col-xs-2">{{key.description}}</div>
-            <div class="col-xs-2">{{key.board}}</div>         
+            <div class="col-xs-2">{{key.board}}</div>    
+          </a>
             <!-- <div class="col-xs-1"><button ng-click="deleteTask(thingy.id)" class="btn btn-danger">X</button></div> -->
         </div>
     </div>

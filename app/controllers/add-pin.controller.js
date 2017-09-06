@@ -22,7 +22,5 @@ app.controller("addPinCtrl", function($scope, pinsFactory, $location, userFactor
             $location.url("/home");
         });
     };
-
-    
-
+      
 });
