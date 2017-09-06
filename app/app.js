@@ -36,10 +36,10 @@ app.config(($routeProvider) => {
 	})
 	.when('/addpin', {
 		templateUrl: 'partials/form.html',
-		controller: 'addTaskCtrl', //change name
+		controller: 'addPinCtrl',
 		resolve: {isAuth}
 	})
-	.when('/task/:itemId', {
+	.when('/pin/:itemId', {
 		templateUrl: 'partials/pin-detail.html',
 		controller: 'detailTaskCtrl',
 		resolve: {isAuth}
@@ -62,6 +62,19 @@ app.run(($location, FBCreds) => {
 	};
 
 	firebase.initializeApp(authConfig);
+});
+
+app.directive('ngAlt', function () {
+  return {
+    restrict: 'A',
+    link: function (scope, elem, attrs) {
+      if (attrs.ngAlt) {
+        elem.on('load', function (event) {
+          elem[0].setAttribute("alt", attrs.ngAlt);
+        });
+      }
+    }
+  };
 });
 
 // // example of $rootScope

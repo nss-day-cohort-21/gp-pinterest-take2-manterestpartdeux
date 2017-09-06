@@ -24,20 +24,5 @@ app.controller("homeCtrl", function($scope, pinsFactory, userFactory, filterFact
 
     // };
 
-    
-    // $scope.toggleDoneTask = function(obj) {
-    //     console.log("toggledonetask", obj);
-    //     let status = obj.isCompleted ? true : false;
-    //     let tempObj = { isCompleted: status };
-    //     todoFactory.editTask(obj.id, tempObj)
-    //         .then(() => {
-    //             console.log("then is updated");
-    //             //tells it to pull updated data list back down:
-    //             showAllTasks();
-    //         });
-    // };
-
-
     showAllPins();
-
 });

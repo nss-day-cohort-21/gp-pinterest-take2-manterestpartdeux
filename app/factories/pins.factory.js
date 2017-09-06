@@ -10,12 +10,12 @@ app.factory("pinsFactory", function($q, $http, FBCreds){
         console.log('megaObject', megaObject);
         
         let pinCollection = megaObject.data;
-        console.log('pinCollection', pinCollection.flavors);
+        console.log('pinCollection', pinCollection.pins);
         // Object.keys(pinCollection.flavors).forEach((key)=>{
         //   pinCollection[key] = key;
         //   pins.push(pinCollection[key]);
         // });
-        resolve(pinCollection.flavors);
+        resolve(pinCollection.pins);
       })
       .catch((error)=>{
         console.log('error', error);
@@ -30,7 +30,17 @@ app.factory("pinsFactory", function($q, $http, FBCreds){
   };
 
   const addPin = function(obj){
-
+    let newObj = JSON.stringify(obj);
+    return $http.post(`${FBCreds.databaseURL}/pins.json`, newObj)
+      .then((data)=>{
+          console.log('data should be an ID', data);
+          return data;
+      }, (error) =>{
+          let errorCode = error.code;
+          let errorMessage = error.message;
+          console.log('error', errorCode, errorMessage);
+      });
+  
   };
 
   const editPin = function(id, obj){

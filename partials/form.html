@@ -1,0 +1,22 @@
+<h3>{{title}}</h3>
+<form>
+    <div class="form-group">
+        <label>Url</label>
+        <input type="text" class="form-control" placeholder="Place Link Url Here" ng-model="pin.url"/>
+    </div>
+    <div class="form-group">
+        <label>Image Url</label>
+        <input type="text" class="form-control" placeholder="Place Image Url Here" ng-model="pin.imgUrl"/>
+    </div>
+    <div class="form-group">
+        <label>Description</label>
+        <input type="text" class="form-control" placeholder="Type Description Here" ng-model="pin.description"/>
+    </div>
+    <div class="form-group">
+        <label>Board</label>
+        <input type="text" class="form-control" placeholder="Select Board" ng-model="pin.board"/>
+    </div>
+    <div class="text-center">
+        <button class="btn btn-default" ng-click="submitTask()">{{submitButtonText}}</button>    
+    </div>
+</form>

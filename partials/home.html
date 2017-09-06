@@ -1,12 +1,13 @@
 <h1>HOME IS WHERE YOUR MORGAGE PAYMENT IS SENT TO</h1>
+<div class="pin-img"><a href="#"><img ng-src="http://www.roadsideamerica.com/attract/images/in/INCOLtoilet_rodriguez.jpg" alt="test img brkn"/></a></div>
 <div><a ng-href="#!/addpin"><button ng-click="addPin()" class="btn btn-danger">+</button></a></div>
-<div ng-repeat="thingy in pins">
+<div ng-repeat="key in pins">
   <!-- ng-repeat= "| filter: searchText.search | filter: isCompleted: false" -->
     <div class="panel panel-default">
         <div class="panel-body">
-            <div class="col-xs-6"><a ng-href="#!/task/{{thingy.id}}">{{ thingy.title}}</a></div>
-            <div class="col-xs-2">{{thingy.price}}</div>
-            <div class="col-xs-2">{{thingy.type}}</div>            
+            <div class="col-xs-6"><a ng-href="#!/pin/{{key.id}}"><img ng-src="{{key.imgUrl}}" alt="broken"/></a></div>
+            <div class="col-xs-2">{{key.description}}</div>
+            <div class="col-xs-2">{{key.board}}</div>         
             <!-- <div class="col-xs-1"><button ng-click="deleteTask(thingy.id)" class="btn btn-danger">X</button></div> -->
         </div>
     </div>
