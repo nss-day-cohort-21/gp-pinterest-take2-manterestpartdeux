@@ -1,3 +1,19 @@
 .container--auth {
 	margin: 10vh auto;
 }
+
+//makes profile pic right size and displays in circle
+.profile-pic {
+	max-width: 200px;
+	height: auto;
+	border-radius: 50%;
+}
+
+//moving the page content down a bit
+.container {
+	margin-top: 30px;
+}
+
+// #profile-top {
+// 	background-color: #BFBFBF
+// }

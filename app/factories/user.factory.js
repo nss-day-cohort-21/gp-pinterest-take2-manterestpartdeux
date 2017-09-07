@@ -12,6 +12,7 @@ app.factory("userFactory", function($q, $http, FBCreds){
     let currentUser = null;
     // This is the complete user object that comes back from Firebase
     let FBCurrentUser = null;
+    let currentUserFullObj = null;
 
 
     const getCurrentUser = function(){
@@ -19,9 +20,27 @@ app.factory("userFactory", function($q, $http, FBCreds){
 
     };
 
+    //use the current user uid to get full user object from fb database
+    const getCurrentUserFullObj = function(uid){
+        return $q((resolve, reject) => {
+            console.log("inside getCurrentUserFullObj");
+            $http.get(`${FBCreds.databaseURL}/users/.json?orderBy="uid"&equalTo="${uid}"`)
+            .then((data) => {
+                // console.log("data in getCurrentUserFullObj", data);
+                currentUserFullObj = data.data;
+                let objectArr = [];
+                    Object.keys(currentUserFullObj).forEach(function (key) {
+                        objectArr.push(currentUserFullObj[key]);
+                    });
+                currentUserFullObj = objectArr[0];
+                console.log("currentUserFullObj", currentUserFullObj);
+                resolve(currentUserFullObj);
+            });
 
+
+        });
+    };
     
-
 
     const logIn = function(userObj){
         return firebase.auth().signInWithEmailAndPassword(userObj.email, userObj.password)
@@ -172,6 +191,6 @@ app.factory("userFactory", function($q, $http, FBCreds){
 
 
 
-    return {getCurrentUser, logIn, logOut, register, isAuthenticated, authWithProvider, updateDisplayName, userIsInFirebase, addUserToFirebase, getFBCurrentUser};
+    return {getCurrentUser, logIn, logOut, register, isAuthenticated, authWithProvider, updateDisplayName, userIsInFirebase, addUserToFirebase, getFBCurrentUser, getCurrentUserFullObj};
 
 });
