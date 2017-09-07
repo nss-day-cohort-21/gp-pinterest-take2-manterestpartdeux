@@ -51,7 +51,7 @@ app.config(($routeProvider) => {
 	})
 	.when('/pin/:itemId', {
 		templateUrl: 'partials/pin-detail.html',
-		controller: 'detailTaskCtrl',
+		controller: 'pinDetailCtrl',
 		resolve: {isAuth}
 	})
 	.when('/task/:itemId/edit', {

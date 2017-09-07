@@ -3,6 +3,12 @@
 app.controller("profileCtrl", function($scope, pinsFactory, userFactory, filterFactory, $rootScope){
 
     $scope.pins = [];
+    $scope.viewPins = true;
+    $scope.viewBoards = false;
+    $scope.toggle = function(){
+        $scope.viewPins = !$scope.viewPins;
+        $scope.viewBoards = !$scope.viewBoards;
+    };
     let user = userFactory.getCurrentUser();
     // $rootScope.showSearch = true;
     // $scope.searchText = filterFactory;  
@@ -11,8 +17,15 @@ app.controller("profileCtrl", function($scope, pinsFactory, userFactory, filterF
     	pinsFactory.getAllUserPins(user)
     	.then((pins) => {
     		console.log("showAllPins from promise", pins);
-    		$scope.pins = pins;    
+    		$scope.pins = pins;
     	});
+    };
+
+    const showAllUserBoards = function(user){
+        pinsFactory.getAllUserBoards(user)
+        .then((boards)=>{
+            $scope.boards = boards;
+        });
     };
 
     

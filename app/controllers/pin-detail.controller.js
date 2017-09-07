@@ -1,7 +1,7 @@
 "use strict";
 /* handle data for detail view */
 
-app.controller("detailTaskCtrl", function($scope, $routeParams, pinsFactory){
+app.controller("pinDetailCtrl", function($scope, $routeParams, pinsFactory){
 
     console.log('itemId', $routeParams.itemId);
     
