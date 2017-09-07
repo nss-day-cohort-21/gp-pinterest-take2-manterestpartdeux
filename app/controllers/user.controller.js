@@ -29,11 +29,19 @@ app.controller("userCtrl", function ($scope, $window, userFactory, $location) {
 		.then((userData) => {
 			// console.log("user controller newUser", userData);
 			//Immediately log them in
-			logInUser($scope.newAccount);
+			userFactory.logIn($scope.newAccount)
+			.then((newaccount) => {
+				let name = $scope.displayName;
+				// console.log("name", name, "typeof is: ", typeof name);
 			//Update profile using the name they provided
-			userFactory.updateDisplayName($scope.displayName);
-		}, (error) => {
-			console.log("error creating new user", error);
+			userFactory.updateDisplayName(name);
+			})
+			.then((whatever) => {
+				addUser();
+			})
+			.catch((error) => {
+				console.log("error updating display name", error);
+			});
 		
 		});
 	};
@@ -99,12 +107,29 @@ app.controller("userCtrl", function ($scope, $window, userFactory, $location) {
 	function addUser(){
 		userFactory.getFBCurrentUser()
 		.then( (user) => {
-			console.log("user.uid in addUser", user.uid);
-			console.log("userFactory.userIsInFirebase(user.uid) in addUser", userFactory.userIsInFirebase(user.uid));
+			console.log("****user in addUser****", user);
+			// console.log("userFactory.userIsInFirebase(user.uid) in addUser", userFactory.userIsInFirebase(user.uid));
 			userFactory.userIsInFirebase(user.uid)
 			.then((isInFirebase) => {
 				console.log("isInFirebase inside nested .then in addUser", isInFirebase);
+				console.log("user in nested .then in addUser", user);
+				console.log("user.email in nested .then in addUser", user.email);
+				console.log("user.displayName", user.displayName);
+				if(isInFirebase === false) {
+					let userObj = {
+						displayName: user.displayName,
+                      	uid: user.uid,
+                       	photoURL: user.photoURL
+					};
+					console.log("userObj in addUser", userObj);
+				userFactory.addUserToFirebase(userObj);
+				}else {
+					console.log("user already in firebase");
+				}
+				//show home view
+				$window.location.href = "#!/home";
 			});
+			
 				// userFactory.addUserToFirebase(user);
 
 			

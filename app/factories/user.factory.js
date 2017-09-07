@@ -52,14 +52,40 @@ app.factory("userFactory", function($q, $http, FBCreds){
     };
 
     const updateDisplayName = function (name){
-        return firebase.auth().currentUser.updateProfile({
-            displayName: name
-        }).then(function (){
-            console.log("name update successful");
-        }).catch(function() {
-            console.log("error updating name");
-        });
+        return new Promise ((resolve, reject) => { 
+            firebase.auth().currentUser.updateProfile({
+                displayName: name
+            });
+            resolve();
+        });  
     };
+
+/* The three functions below are used in sequence to:
+1. Get the current logged in user from the auth side of FB,
+2. Check and see if that user already exists in our Users collection, and if not,
+3. Add them to our Users collection*/
+
+// Gets the current user from the **Authentication/Users** section of Firebase (not our db section)
+    const getFBCurrentUser = function () {
+        // console.log("userFactory: isAuthenticated");
+            return new Promise ((resolve, reject) => {
+            firebase.auth().onAuthStateChanged( (user) => {
+                    // console.log("user in getFBCurrentUser", user);
+                    // let userTest = user;
+                    // console.log("userTest", userTest);
+                    // console.log("user.displayName", user.displayName);
+                    FBCurrentUser = user;
+                    // {
+                    //     displayName: user.displayName,
+                    //     uid: user.uid,
+                    //     photoURL: user.photoURL
+                    // };
+                    // console.log("FBCurrentUser in getFBCurrentUser return 1**", FBCurrentUser);
+                resolve(FBCurrentUser);
+                });
+            });
+        };
+
 
     //Checks to see if user is already in Firebase "Users" collection
     const userIsInFirebase = function (uid) {
@@ -70,35 +96,43 @@ app.factory("userFactory", function($q, $http, FBCreds){
             $http.get(`${FBCreds.databaseURL}/users.json`)
             .then((data) => {
                 // console.log("data from userIsInFirebase", data.data);
-                let userObjects = data.data;
-                let UIDArray = [];
-                Object.keys(userObjects).forEach(function (key) {
-                    UIDArray.push(userObjects[key].UID);
-                });
-                // console.log("UIDArray", UIDArray);
-                for (let i = 0; i < UIDArray.length; i++) {
-                    if (UIDArray[i] == uid) {
-                        console.log("userIsInFirebase was true with value: ", uid);
-                        isInFirebase = true;
-                    }else {
-                        console.log("userIsInFirebase was false with value: ", uid);
-                        isInFirebase = false;
+                //If there are any users in the db (data.data!== null), then check to see if the passed user is in FB
+                if (data.data !== null) {
+                    let userObjects = data.data;
+                    console.log("userObjects", userObjects);
+                    let UIDArray = [];
+                    Object.keys(userObjects).forEach(function (key) {
+                        UIDArray.push(userObjects[key].uid);
+                    });
+                    // console.log("UIDArray", UIDArray);
+                    for (let i = 0; i < UIDArray.length; i++) {
+                        // console.log("UIDArray[i]: ", UIDArray[i], "uid: ", uid);
+                        if (UIDArray[i] === uid) {
+                            console.log("userIsInFirebase was true with value: ", uid);
+                            isInFirebase = true;
+                            break;
+                        }else {
+                            console.log("userIsInFirebase was false with value: ", uid);
+                            isInFirebase = false;
+                        }
                     }
+                }else {
+                    isInFirebase = false;
                 }
+                resolve(isInFirebase);
             });
-        resolve(isInFirebase);
         });
     };
-    userIsInFirebase(12345678);
 
 
-    // Adds a user to Firebase Users collection
+    // Adds a user to Firebase Users collection.  Expects a preformed user object that gets made in getFBCurrentUser.
     const addUserToFirebase = function(userObj){
         let newObj = JSON.stringify(userObj);
         // console.log("URL is: ", `${FBCreds.databaseURL}/users.json`);
         return $http.post(`${FBCreds.databaseURL}/users.json`, newObj)
         .then((data) => {
             // console.log("added user data returned: ", data);
+            console.log("user was added to firebase db!");
             return data;
 
         }, (error) => {
@@ -108,20 +142,7 @@ app.factory("userFactory", function($q, $http, FBCreds){
         });
     };
 
-    const getFBCurrentUser = function () {
-        // console.log("userFactory: isAuthenticated");
-            return new Promise ((resolve, reject) => {
-            firebase.auth().onAuthStateChanged( (user) => {
-                    console.log("user in getFBCurrentUser", user);
-                    FBCurrentUser = {
-                        displayName: user.displayName,
-                        uid: user.uid
-                    };
-                    // console.log("FBCurrentUser in getFBCurrentUser return 1**", FBCurrentUser);
-                resolve(FBCurrentUser);
-                });
-            });
-        };
+    
 
 
 
