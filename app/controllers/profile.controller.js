@@ -10,6 +10,9 @@ app.controller("profileCtrl", function($scope, pinsFactory, userFactory, filterF
         $scope.viewBoards = !$scope.viewBoards;
     };
     let user = userFactory.getCurrentUser();
+
+
+
     // $rootScope.showSearch = true;
     // $scope.searchText = filterFactory;  
 
@@ -36,6 +39,12 @@ app.controller("profileCtrl", function($scope, pinsFactory, userFactory, filterF
     // 	});
 
     // };
+    // console.log("userFactory.getCurrentUser", userFactory.getCurrentUser());
+    userFactory.getCurrentUserFullObj(userFactory.getCurrentUser())
+    .then((currentUserFullObj) => {
+        $scope.displayName = currentUserFullObj.displayName;
+        $scope.photoURL = currentUserFullObj.photoURL;
+    });
 
     showAllUserPins(user);
 });

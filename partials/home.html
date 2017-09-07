@@ -1,16 +1,16 @@
 <h1 class="row">HOME IS WHERE YOUR MORGAGE PAYMENT IS SENT TO</h1>
 
-<div class="row"><h4 class="col-xs-2">Add Pin</h4><a class="col-xs-2" ng-href="#!/addpin"><button class="btn btn-danger">+</button></a></div>
-<div ng-repeat="key in pins">
-  <!-- ng-repeat= "| filter: searchText.search | filter: isCompleted: false" -->
-    <div class="panel panel-default">
-        <div class="panel-body">
-          <a ng-href="#!/pin/{{key.id}}">
-            <div class="col-xs-6"><img ng-src="{{key.imgUrl}}" alt="broken"/></div>
-            <div class="col-xs-2">{{key.description}}</div>
-            <div class="col-xs-2">{{key.board}}</div>    
-          </a>
-            <!-- <div class="col-xs-1"><button ng-click="deleteTask(thingy.id)" class="btn btn-danger">X</button></div> -->
-        </div>
+<div><a ng-href="#!/addpin"><button ng-click="addPin()" class="btn btn-danger">+</button></a></div>
+<div class="card-columns">
+
+  <div ng-repeat="key in pins" class="card">
+    <!-- ng-repeat= "| filter: searchText.search | filter: isCompleted: false" -->
+    <img class="card-img-top img-fluid" ng-src="{{key.imgUrl}}" alt="Card image cap"/>
+    <div class="card-block">
+      <h4 class="card-title">{{key.description}}</h4>
+      <p class="card-text">More content would go here.</p>
+      <p class="card-text"><small class="text-muted">Board: {{key.board}}</small></p>
     </div>
+  </div>
+
 </div>
