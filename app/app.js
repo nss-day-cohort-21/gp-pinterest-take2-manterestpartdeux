@@ -34,9 +34,19 @@ app.config(($routeProvider) => {
 		controller: 'homeCtrl',
 		resolve: {isAuth}
 	})
+	.when('/profile', {
+		templateUrl: 'partials/profile.html',
+		controller: 'profileCtrl',
+		resolve: {isAuth}
+	})
 	.when('/addpin', {
 		templateUrl: 'partials/form.html',
 		controller: 'addPinCtrl',
+		resolve: {isAuth}
+	})
+	.when('/addboard', {
+		templateUrl: 'partials/form-board.html',
+		controller: 'addBoardCtrl',
 		resolve: {isAuth}
 	})
 	.when('/pin/:itemId', {
