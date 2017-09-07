@@ -116,13 +116,23 @@ app.controller("userCtrl", function ($scope, $window, userFactory, $location) {
 				console.log("user.email in nested .then in addUser", user.email);
 				console.log("user.displayName", user.displayName);
 				if(isInFirebase === false) {
-					let userObj = {
-						displayName: user.displayName,
-                      	uid: user.uid,
-                       	photoURL: user.photoURL
-					};
-					console.log("userObj in addUser", userObj);
-				userFactory.addUserToFirebase(userObj);
+					if($scope.displayName === ""){
+						let userObj = {
+							displayName: user.displayName,
+	                      	uid: user.uid,
+	                       	photoURL: user.photoURL
+						};
+						console.log("userObj in addUser", userObj);
+						userFactory.addUserToFirebase(userObj);
+					}else {
+						let userObj = {
+							displayName: $scope.displayName,
+	                      	uid: user.uid,
+	                       	photoURL: user.photoURL
+						};
+						console.log("userObj in addUser", userObj);
+						userFactory.addUserToFirebase(userObj);
+					}
 				}else {
 					console.log("user already in firebase");
 				}
