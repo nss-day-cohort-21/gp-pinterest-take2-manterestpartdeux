@@ -14,8 +14,10 @@
     </div>
     <div class="form-group">
         <label>Board</label>
-        <input type="text" class="form-control" placeholder="Select Board" ng-model="pin.board"/>
+        <!-- <input type="text" class="form-control" placeholder="Select Board" ng-model="pin.board"/> -->
+        <select class="btn btn-default" ng-model="selectedBoard" ng-options="board.board for board in boards"></select>
     </div>
+
     <div class="text-center">
         <button class="btn btn-default" ng-click="submitTask()">{{submitButtonText}}</button>    
     </div>

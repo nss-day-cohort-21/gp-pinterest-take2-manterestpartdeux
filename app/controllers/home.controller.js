@@ -3,7 +3,6 @@
 app.controller("homeCtrl", function($scope, pinsFactory, userFactory, filterFactory, $rootScope){
 
     $scope.pins = [];
-    // let user = userFactory.getCurrentUser();
     // $rootScope.showSearch = true;
     // $scope.searchText = filterFactory;  
 

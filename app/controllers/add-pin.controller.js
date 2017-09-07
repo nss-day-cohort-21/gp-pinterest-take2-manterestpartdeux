@@ -6,7 +6,12 @@ app.controller("addPinCtrl", function($scope, pinsFactory, $location, userFactor
     $scope.submitButtonText = "Add New Pin";
     let user = userFactory.getCurrentUser();
     console.log('user', user);
-    
+
+    pinsFactory.getAllUserBoards(user)
+    .then((boards)=>{
+        $scope.boards = boards;
+        // console.log('$scope.boards', $scope.boards);
+    });
 
     $scope.pin = {
         url: "",
