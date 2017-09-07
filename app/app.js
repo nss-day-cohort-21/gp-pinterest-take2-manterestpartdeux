@@ -31,7 +31,7 @@ app.config(($routeProvider) => {
 	})
 	.when('/home', {
 		templateUrl: 'partials/home.html',
-		controller: 'listCtrl',
+		controller: 'homeCtrl',
 		resolve: {isAuth}
 	})
 	.when('/item/newItem', {

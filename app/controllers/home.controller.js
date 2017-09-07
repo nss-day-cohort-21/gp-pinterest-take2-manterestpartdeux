@@ -1,7 +1,10 @@
+"use strict";
+
 app.controller("homeCtrl", function($scope, userFactory, filterFactory, $rootScope){
 
     // $scope.tasks = [];
-    // let user = userFactory.getCurrentUser();
+    let user = userFactory.getCurrentUser();
+
     // $rootScope.showSearch = true;
     // $scope.searchText = filterFactory;  
 
