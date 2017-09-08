@@ -1,12 +1,15 @@
-<div class="container container--auth">
-  <div class="col-xs-6">
-    <h4>Login with Google</h4>
-    <button ng-click="loginGoogle()" class="btn btn-info">Sign In</button>
-  </div><br>
-  <hr>
-  <div class="col-xs-6 text-right">
-    <section class="auth-form">
-      <h4>Already a user? Login!</h4>
+<div class="container--auth">
+  
+  <div class="row">
+    <div class="col-xs-6">
+      <h4>Login with Google</h4>
+      <button ng-click="loginGoogle()" class="btn btn-info">Sign In</button>
+    </div>
+  </div>
+      <hr>
+  <div class="row">
+    <div class="col-xs-6">
+      <h4>Login with Email</h4>
       <div>
         Email: <input type="text" autofocus="true" ng-model="account.email">
       </div>
@@ -16,7 +19,12 @@
       <div>
         <button ng-click="login()" class="btn btn-info">Login</button>
       </div>
-      <hr><br>
+    </div>
+  </div>
+    <br>
+    <hr>
+  <div class="row">
+    <div class="col-xs-6">
       <h4> New User? Register!</h4>
       <div>
         Name: <input type="text" ng-model="displayName">
@@ -30,6 +38,9 @@
       <div>
         <button ng-click="register()" class="btn btn-default">Register</button>
       </div>
-    </section>
+    </div>
   </div>
+   
+
+
 </div>
