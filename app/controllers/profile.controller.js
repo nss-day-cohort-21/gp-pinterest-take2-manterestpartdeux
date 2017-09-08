@@ -19,8 +19,8 @@ app.controller("profileCtrl", function($scope, pinsFactory, userFactory, filterF
     const showAllUserPins = function(user){
     	pinsFactory.getAllUserPins(user)
     	.then((pins) => {
-    		console.log("showAllPins from promise", pins);
-    		$scope.pins = pins;
+            console.log("showAllPins from promise", pins);
+            $scope.pins = pins;
     	});
     };
 
