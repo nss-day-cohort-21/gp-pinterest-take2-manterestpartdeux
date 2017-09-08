@@ -1,16 +1,18 @@
-<h1 class="row">HOME IS WHERE YOUR MORGAGE PAYMENT IS SENT TO</h1>
+<h1 class="row">Manterest</h1>
 
-<div><a ng-href="#!/addpin"><button ng-click="addPin()" class="btn btn-danger">+</button></a></div>
+<div class="row"><h4 class="col-xs-2">Add Pin</h4><a ng-href="#!/addpin"><button ng-click="addPin()" class="btn btn-danger">+</button></a></div>
 <div class="card-columns">
 
   <div ng-repeat="key in pins" class="card">
-    <!-- ng-repeat= "| filter: searchText.search | filter: isCompleted: false" -->
-    <img class="card-img-top img-fluid" ng-src="{{key.imgUrl}}" alt="Card image cap"/>
-    <div class="card-block">
-      <h4 class="card-title">{{key.description}}</h4>
-      <p class="card-text">More content would go here.</p>
-      <p class="card-text"><small class="text-muted">Board: {{key.board}}</small></p>
-    </div>
+    <a ng-href="#!/pin/{{key.id}}">
+      <!-- ng-repeat= "| filter: searchText.search | filter: isCompleted: false" -->
+      <img class="card-img-top img-fluid" ng-src="{{key.imgUrl}}" alt="Card image cap"/>
+      <div class="card-block">
+        <h4 class="card-title">{{key.description}}</h4>
+        <p class="card-text">More content would go here.</p>
+        <p class="card-text"><small class="text-muted">Board: {{key.board}}</small></p>
+      </div>
+    </a>
   </div>
 
 </div>

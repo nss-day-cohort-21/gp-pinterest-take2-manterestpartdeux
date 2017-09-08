@@ -15,7 +15,7 @@
     <div class="form-group">
         <label>Board</label>
         <!-- <input type="text" class="form-control" placeholder="Select Board" ng-model="pin.board"/> -->
-        <select class="btn btn-default" ng-model="pin.boardid" ng-options="board.board for board in boards track by board.id">
+        <select class="btn btn-default" ng-model="pin.boardid" ng-options="board.id as board.board for board in boards">
             <!-- <option value=""> choose board </option> -->
         </select>
     </div>

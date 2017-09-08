@@ -7,16 +7,17 @@
   </div>
 
   <div class="row"><h4 class="col-xs-2">Add Board</h4><a class="col-xs-2" ng-href="#!/addboard"><button class="btn btn-danger">+</button></a><h4 class="col-xs-2">Add Pin</h4><a class="col-xs-2" ng-href="#!/addpin"><button class="btn btn-danger">+</button></a></div>
+  <div class="row"><button class="btn btn-default" ng-click="toggle()">Boards</button><button class="btn btn-default" ng-click="toggle()">Pins</button></div>
 </section>
 
 <hr>
 
 <div class="card-columns">
 
-  <div ng-repeat="key in pins" class="card">
+  <div ng-show="viewPins" ng-repeat="key in pins" class="card">
     <!-- ng-repeat= "| filter: searchText.search | filter: isCompleted: false" -->
     <a ng-href="#!/pin/{{key.id}}">
-      <img class="card-img-top img-fluid" ng-src="{{key.imgUrl}}"" alt="Card image cap"/>
+      <img class="card-img-top img-fluid" ng-src="{{key.imgUrl}}" alt="Card image cap"/>
       <div class="card-block">
         <h4 class="card-title">{{key.description}}</h4>
         <p class="card-text">More content would go here.</p>
@@ -25,4 +26,16 @@
     </a>
   </div>
 
+  <div ng-show="viewPins" ng-repeat="board in boards">
+  <!-- ng-repeat= "| filter: searchText.search | filter: isCompleted: false" -->
+    <div class="panel panel-default">
+        <div class="panel-body">
+          <a ng-href="#!/pin/{{key.id}}">
+            <div class="col-xs-2">{{board.board}}</div>
+            <div class="col-xs-2">{{board.board}}</div>    
+          </a>
+            <!-- <div class="col-xs-1"><button ng-click="deleteTask(thingy.id)" class="btn btn-danger">X</button></div> -->
+        </div>
+    </div>
+</div>
 </div>

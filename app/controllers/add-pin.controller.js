@@ -25,7 +25,7 @@ app.controller("addPinCtrl", function($scope, pinsFactory, $location, userFactor
     };
     $scope.submitTask = function(){
         console.log('$scope.pin submitted', $scope.pin);
-        
+        // $scope.pin.boardid
         pinsFactory.addPin($scope.pin)
         .then((data)=>{
             $location.url("/home");
