@@ -99,7 +99,15 @@ app.factory("pinsFactory", function($q, $http, FBCreds){
   };
 
   const deletePin = function(id){
-
+    return $q((resolve, reject) => {
+            $http.delete(`${FBCreds.databaseURL}/pins/${id}.json`)
+            .then((response) => {
+                resolve(response);
+            })
+            .catch((error) => {
+                reject(error);
+            });
+        });
   };
 
   const getSinglePin = function(id){

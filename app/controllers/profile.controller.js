@@ -32,13 +32,15 @@ app.controller("profileCtrl", function($scope, pinsFactory, userFactory, filterF
     };
 
     
-    // $scope.deleteTask = function(id){
-    // 	todoFactory.deleteTask(id)
-    // 	.then(() => {
-    // 		showAllTasks();
-    // 	});
+    $scope.deletePin = function(id){
+    	pinsFactory.deletePin(id)
+    	.then(() => {
+    		console.log("pin deleted");
+            showAllUserPins(user); 
+    	});
+    };
 
-    // };
+    
     // console.log("userFactory.getCurrentUser", userFactory.getCurrentUser());
     userFactory.getCurrentUserFullObj(userFactory.getCurrentUser())
     .then((currentUserFullObj) => {

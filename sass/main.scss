@@ -17,3 +17,21 @@
 // #profile-top {
 // 	background-color: #BFBFBF
 // }
+
+.delete-chip {
+	opacity: .2;
+	position: absolute;
+	top: 4px;
+    right: 4px;
+    z-index: 1000;
+    padding: 5px 5px 2px;
+    font-size: 1.75em;
+    color: #FF0000;
+    a {
+    	color: #FF0000;
+    }
+}
+
+.img-container:hover .delete-chip {
+	opacity: 1;
+}
